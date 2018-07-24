@@ -35,21 +35,35 @@ import propTypes from 'prop-types';
 //dump component
 function Movie({poster, title}){
     return (
-        <div>
-            <MoviePoster poster={poster}/>
-            <h1>{title}</h1>     
+        <div className="Movie">
+            <div className="Movie_Clumns">
+                <MoviePoster poster={poster}/>
+            </div>
+            <div className="Movie_Columns">
+                <h1>{title}</h1>     
+                <div className="Movie_Genres">
+                    </div>
+            </div>    
         </div>
     )
 }
 
 Movie.prototype = {
     poster : propTypes.string.isRequired,
-    title : propTypes.string.isRequired
+    title : propTypes.string.isRequired,
+    genres : propTypes.string.isRequired,
+    synopsis : propTypes.string.isRequired
 }
 
 function MoviePoster({poster}){
     return (
         <img src={poster} alt="Movie Poster"/>
+    )
+}
+
+function MovieGenre(){
+    return  (
+        <span className="Movie_genre"></span>
     )
 }
 
