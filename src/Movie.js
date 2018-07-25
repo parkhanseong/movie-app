@@ -33,16 +33,23 @@ import propTypes from 'prop-types';
 // }
 
 //dump component
-function Movie({poster, title}){
+function Movie({poster, title, genres, synopsis}){
+    
+    //console.log(">>>> genres :" + genres);
+    
     return (
         <div className="Movie">
-            <div className="Movie_Clumns">
-                <MoviePoster poster={poster}/>
+            <div className="Movie__Columns">
+                <MoviePoster poster={poster} alt={title}/>
             </div>
-            <div className="Movie_Columns">
+            <div className="Movie__Columns">
                 <h1>{title}</h1>     
-                <div className="Movie_Genres">
-                    </div>
+                <div className="Movie__Genres">
+                    {genres.map((genre, index) => <MovieGenre genre={genre} key={index} /> )}
+                </div>
+                <p className="Movie_Synopsis">
+                    {synopsis}
+                </p>
             </div>    
         </div>
     )
@@ -54,21 +61,25 @@ Movie.prototype = {
     genres : propTypes.string.isRequired,
     synopsis : propTypes.string.isRequired
 }
-
-function MoviePoster({poster}){
-    return (
-        <img src={poster} alt="Movie Poster"/>
-    )
-}
-
-function MovieGenre(){
-    return  (
-        <span className="Movie_genre"></span>
-    )
-}
-
 MoviePoster.propTypes = {
-    poster : propTypes.string.isRequired
+     poster : propTypes.string.isRequired,
+     alt : propTypes.string.isRequired
 }
+MovieGenre.propTypes = {
+     genre : propTypes.string.isRequired
+}
+
+function MoviePoster({poster, alt}){
+    return (
+        <img src={poster} alt={alt} title={alt} className="Movie__Poster"/>
+    )
+}
+
+function MovieGenre({genre}){
+    return  (
+        <span className="Movie_genre">{genre} </span>
+    )
+}
+
 
 export default Movie
