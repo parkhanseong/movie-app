@@ -1,41 +1,11 @@
 import React from 'react';
 import './Movie.css';
 import propTypes from 'prop-types';
-
-// class Movie extends Component{
-
-//     static propTypes = {
-//         title : propTypes.string.isRequired,
-//         poster : propTypes.string.isRequired
-//     }
-
-//     render(){
-//         return(
-//             <div>
-//                 <MoviePoster poster={this.props.poster}/>
-//                 <h1>{this.props.title}</h1>     
-//             </div>
-//         )
-//     }
-// }
-
-// class MoviePoster extends Component{
-    
-//     static propTypes ={
-//         poster : propTypes.string.isRequired
-//     }
-
-//     render(){
-//         return(
-//             <img src={this.props.poster} alt="Movie Poster"/>
-//         )
-//     }
-// }
+import LinesEllipsis from 'react-lines-ellipsis'
+import './Movie.css'
 
 //dump component
 function Movie({poster, title, genres, synopsis}){
-    
-    //console.log(">>>> genres :" + genres);
     
     return (
         <div className="Movie">
@@ -47,9 +17,15 @@ function Movie({poster, title, genres, synopsis}){
                 <div className="Movie__Genres">
                     {genres.map((genre, index) => <MovieGenre genre={genre} key={index} /> )}
                 </div>
-                <p className="Movie_Synopsis">
-                    {synopsis}
-                </p>
+                <div className="Movie_Synopsis">
+                    <LinesEllipsis
+                        text={synopsis}
+                        maxLine='3'
+                        ellipsis='...'
+                        trimRight
+                        basedOn='letters'
+                    />   
+                </div>
             </div>    
         </div>
     )
